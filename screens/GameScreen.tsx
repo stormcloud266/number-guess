@@ -1,9 +1,10 @@
 import React, { ReactElement, useState, useRef, useEffect } from 'react'
-import { Text, View, StyleSheet, Button, Alert } from 'react-native'
+import { View, StyleSheet, Alert } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 import NumberContainer from '../components/NumberContainer'
 import Card from '../components/Card'
-import Title from '../components/Title'
 import Body from '../components/Body'
+import MainButton from '../components/MainButton'
 
 interface Props {
   userChoice: number
@@ -72,9 +73,13 @@ const GameScreen = ({ userChoice, onGameOver }: Props): ReactElement => {
       <Body>Opponent's Guess</Body>
       <NumberContainer selectedNumber={currentGuess} />
       <Card style={styles.buttonContainer}>
-        <Button title="LOWER" onPress={nextGuessHandler.bind(this, 'lower')} />
-        <Button
-          title="GREATER"
+        <MainButton
+          title={<Ionicons name="md-remove" size={24} color="white" />}
+          secondary
+          onPress={nextGuessHandler.bind(this, 'lower')}
+        />
+        <MainButton
+          title={<Ionicons name="md-add" size={24} color="white" />}
           onPress={nextGuessHandler.bind(this, 'greater')}
         />
       </Card>

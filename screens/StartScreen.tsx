@@ -2,7 +2,6 @@ import React, { ReactElement, useState } from 'react'
 import {
   View,
   StyleSheet,
-  Button,
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
@@ -11,6 +10,7 @@ import Card from '../components/Card'
 import Input from '../components/Input'
 import Body from '../components/Body'
 import Title from '../components/Title'
+import MainButton from '../components/MainButton'
 import NumberContainer from '../components/NumberContainer'
 
 interface Props {
@@ -58,7 +58,7 @@ const StartScreen = ({ onStartGame }: Props): ReactElement => {
       <Card style={styles.summaryContainer}>
         <Body>You Selected</Body>
         <NumberContainer selectedNumber={selectedNumber} />
-        <Button
+        <MainButton
           title="START GAME"
           onPress={() => onStartGame(selectedNumber)}
         />
@@ -84,18 +84,10 @@ const StartScreen = ({ onStartGame }: Props): ReactElement => {
           />
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
-              <Button
-                title="Reset"
-                color="#617779"
-                onPress={resetInputHandler}
-              />
+              <MainButton secondary title="Reset" onPress={resetInputHandler} />
             </View>
             <View style={styles.button}>
-              <Button
-                title="Confirm"
-                color="#25a9ad"
-                onPress={confirmInputHandler}
-              />
+              <MainButton title="Confirm" onPress={confirmInputHandler} />
             </View>
           </View>
         </Card>
@@ -113,7 +105,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    marginVertical: 10,
+    marginVertical: 20,
   },
   inputContainer: {
     width: 300,
@@ -128,10 +120,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
-    paddingHorizontal: 15,
+    marginTop: 20,
   },
   button: {
-    width: 100,
+    width: '48%',
   },
   summaryContainer: {
     marginTop: 20,

@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import Colors from '../constants/colors'
+import Title from './Title'
 
 interface Props {
   title: string
@@ -9,7 +10,7 @@ interface Props {
 const Header = ({ title }: Props): ReactElement => {
   return (
     <View style={styles.header}>
-      <Text style={styles.title}>{title}</Text>
+      <Title style={styles.title}>{title}</Title>
     </View>
   )
 }
@@ -25,7 +26,6 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'black',
-    fontSize: 18,
   },
 })
 

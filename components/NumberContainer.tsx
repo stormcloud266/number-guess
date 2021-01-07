@@ -1,6 +1,8 @@
 import React, { ReactElement } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import Colors from '../constants/colors'
+import Body from './Body'
+
 interface Props {
   selectedNumber: number | undefined
 }
@@ -8,7 +10,7 @@ interface Props {
 const NumberContainer = ({ selectedNumber }: Props): ReactElement => {
   return (
     <View style={styles.container}>
-      <Text style={styles.number}>{selectedNumber}</Text>
+      <Body style={styles.number}>{selectedNumber}</Body>
     </View>
   )
 }

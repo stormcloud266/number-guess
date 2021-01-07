@@ -1,6 +1,5 @@
 import React, { ReactElement, useState } from 'react'
 import {
-  Text,
   View,
   StyleSheet,
   Button,
@@ -10,6 +9,8 @@ import {
 } from 'react-native'
 import Card from '../components/Card'
 import Input from '../components/Input'
+import Body from '../components/Body'
+import Title from '../components/Title'
 import NumberContainer from '../components/NumberContainer'
 
 interface Props {
@@ -55,7 +56,7 @@ const StartScreen = ({ onStartGame }: Props): ReactElement => {
   if (confirmed) {
     confirmedOutput = (
       <Card style={styles.summaryContainer}>
-        <Text>You Selected</Text>
+        <Body>You Selected</Body>
         <NumberContainer selectedNumber={selectedNumber} />
         <Button
           title="START GAME"
@@ -68,9 +69,9 @@ const StartScreen = ({ onStartGame }: Props): ReactElement => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        <Text style={styles.title}>Start a New Game!</Text>
+        <Title style={styles.title}>Start a New Game!</Title>
         <Card style={styles.inputContainer}>
-          <Text>Select a Number</Text>
+          <Body>Select a Number</Body>
           <Input
             style={styles.input}
             blurOnSubmit

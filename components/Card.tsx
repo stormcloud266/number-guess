@@ -1,8 +1,8 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import { View, StyleSheet, ViewStyle } from 'react-native'
 
 interface Props {
-  children: JSX.Element | JSX.Element[]
+  children: ReactNode
   style?: ViewStyle
 }
 

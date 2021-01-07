@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
     borderBottomWidth: 1,
     marginVertical: 10,
+    fontFamily: 'open-sans',
   },
 })
 

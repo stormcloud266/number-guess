@@ -2,6 +2,8 @@ import React, { ReactElement, useState, useRef, useEffect } from 'react'
 import { Text, View, StyleSheet, Button, Alert } from 'react-native'
 import NumberContainer from '../components/NumberContainer'
 import Card from '../components/Card'
+import Title from '../components/Title'
+import Body from '../components/Body'
 
 interface Props {
   userChoice: number
@@ -67,7 +69,7 @@ const GameScreen = ({ userChoice, onGameOver }: Props): ReactElement => {
 
   return (
     <View style={styles.container}>
-      <Text>Opponent's Guess</Text>
+      <Body>Opponent's Guess</Body>
       <NumberContainer selectedNumber={currentGuess} />
       <Card style={styles.buttonContainer}>
         <Button title="LOWER" onPress={nextGuessHandler.bind(this, 'lower')} />

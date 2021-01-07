@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react'
-import { Text, View, StyleSheet, Button } from 'react-native'
+import { View, StyleSheet, Button } from 'react-native'
+import Body from '../components/Body'
 
 interface Props {
   rounds: number
@@ -14,9 +15,9 @@ const GameOverScreen = ({
 }: Props): ReactElement => {
   return (
     <View style={styles.container}>
-      <Text>The game is over!</Text>
-      <Text>Number of rounds: {rounds}</Text>
-      <Text>Number was: {userNumber}</Text>
+      <Body>The game is over!</Body>
+      <Body>Number of rounds: {rounds}</Body>
+      <Body>Number was: {userNumber}</Body>
       <Button title="Play Again" onPress={startNewGame} />
     </View>
   )

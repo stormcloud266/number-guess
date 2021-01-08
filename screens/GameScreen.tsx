@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, useRef, useEffect } from 'react'
-import { View, StyleSheet, Alert } from 'react-native'
+import { View, StyleSheet, Alert, ScrollView, FlatList } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import NumberContainer from '../components/NumberContainer'
 import Card from '../components/Card'
@@ -27,18 +27,24 @@ const generateRandomBetween = (
   }
 }
 
+const renderListItem = (listLength: number, itemData: any) => (
+  <View style={styles.listItem}>
+    <Body>#{listLength - itemData.index}</Body>
+    <Body>{itemData.item}</Body>
+  </View>
+)
+
 const GameScreen = ({ userChoice, onGameOver }: Props): ReactElement => {
-  const [currentGuess, setCurrentGuess] = useState(
-    generateRandomBetween(1, 100, userChoice)
-  )
-  const [rounds, setRounds] = useState<number>(0)
+  const initialGuess = generateRandomBetween(1, 100, userChoice)
+  const [currentGuess, setCurrentGuess] = useState(initialGuess)
+  const [guesses, setGuesses] = useState<number[]>([initialGuess])
 
   const currentLow = useRef(1)
   const currentHigh = useRef(100)
 
   useEffect(() => {
     if (currentGuess === userChoice) {
-      onGameOver(rounds)
+      onGameOver(guesses.length)
     }
   }, [currentGuess, userChoice, onGameOver])
 
@@ -48,7 +54,7 @@ const GameScreen = ({ userChoice, onGameOver }: Props): ReactElement => {
       (direction === 'greater' && currentGuess > userChoice)
     ) {
       Alert.alert('Hey! No cheating.', 'Please select the real hint.', [
-        { text: 'I repent', style: 'cancel' },
+        { text: 'Okay!', style: 'cancel' },
       ])
       return
     }
@@ -56,7 +62,7 @@ const GameScreen = ({ userChoice, onGameOver }: Props): ReactElement => {
     if (direction === 'lower') {
       currentHigh.current = currentGuess
     } else {
-      currentLow.current = currentGuess
+      currentLow.current = currentGuess + 1
     }
 
     const nextNumber = generateRandomBetween(
@@ -64,7 +70,7 @@ const GameScreen = ({ userChoice, onGameOver }: Props): ReactElement => {
       currentHigh.current,
       currentGuess
     )
-    setRounds((curRounds) => ++curRounds)
+    setGuesses((prevGuesses) => [nextNumber, ...prevGuesses])
     setCurrentGuess(nextNumber)
   }
 
@@ -83,6 +89,16 @@ const GameScreen = ({ userChoice, onGameOver }: Props): ReactElement => {
           onPress={nextGuessHandler.bind(this, 'greater')}
         />
       </Card>
+      <View style={styles.list}>
+        {/* <ScrollView>
+          {guesses.map((guess, i) => renderListItem(guess, guesses.length - i))}
+        </ScrollView> */}
+        <FlatList
+          data={guesses}
+          keyExtractor={(item) => item.toString()}
+          renderItem={renderListItem.bind(this, guesses.length)}
+        />
+      </View>
     </View>
   )
 }
@@ -99,6 +115,18 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: 330,
     maxWidth: '80%',
+  },
+  list: {
+    width: '80%',
+    flex: 1,
+  },
+  listItem: {
+    borderColor: '#ddd',
+    borderWidth: 1,
+    marginVertical: 10,
+    padding: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 })
 

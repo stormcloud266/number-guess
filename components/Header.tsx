@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Platform } from 'react-native'
 import Colors from '../constants/colors'
 import Title from './Title'
 
@@ -20,12 +20,14 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 90,
     paddingTop: 36,
-    backgroundColor: Colors.primary,
+    backgroundColor: Platform.OS === 'android' ? Colors.primary : 'white',
     alignItems: 'center',
     justifyContent: 'center',
+    borderColor: '#ddd',
+    borderBottomWidth: Platform.OS === 'android' ? 0 : 1,
   },
   title: {
-    color: '#fff',
+    color: Platform.OS === 'android' ? 'white' : Colors.primary,
   },
 })
 
